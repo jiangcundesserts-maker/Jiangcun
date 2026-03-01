@@ -108,9 +108,40 @@
     </div>
 </div>
 
-<div id="custom-confirm" class="confirm-overlay"><div class="confirm-box"><div class="confirm-title">📦 配送箱數確認</div><div id="confirm-text" class="confirm-content"></div><div class="confirm-btns"><button class="btn btn-secondary" onclick="closeConfirm(false)">返回修改</button><button class="btn btn-primary" onclick="closeConfirm(true)">確認明細</button></div></div></div>
-<div id="modal" class="modal"><div class="modal-body"><h3>💰 匯款帳戶資訊</h3><p>應匯總計：<strong id="modal-amt" style="color:var(--error-red); font-size: 1.3rem;"></strong> 元</p><div class="form-group" style="text-align: left;"><label>匯款後五碼：</label><input type="tel" id="lastFive" maxlength="5" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)"><div class="error-msg" id="lastFive-error">請輸入正確 5 碼數字</div></div><button id="submit-btn" class="btn btn-primary" style="width: 100%;" onclick="finalSubmit()">確認送出訂單</button><p onclick="closeModal()" style="color:gray; margin-top:15px; cursor:pointer;">返回修改</p></div></div>
-<div id="success-modal" class="modal"><div class="modal-body"><h2 style="color: var(--ghibli-green);">🎉 訂單已受理！</h2><a href="https://lin.ee/vleNEUw" target="_blank" class="line-btn">💬 加入 LINE 追蹤進度</a><button class="btn btn-primary" onclick="location.reload()">回首頁</button></div></div>
+<div id="custom-confirm" class="confirm-overlay"><div class="confirm-box"><div class="confirm-title">📦 配送箱數確認</div><div id="confirm-text" class="confirm-content"></div><div class="confirm-btns"><button class="btn btn-secondary" onclick="closeConfirm(false)">返回修改</button><button class="btn btn-primary" onclick="closeConfirm(true)">確認明細</button></div></div>
+</div>
+<div id="modal" class="modal">
+    <div class="modal-body">
+        <h3>💰 匯款帳戶資訊</h3>
+        <div style="background: white; padding: 15px; border-radius: 15px; border: 2px dashed var(--ghibli-brown); text-align: left; margin-bottom: 15px;">
+            <strong>銀行：</strong> 700 (郵局)<br><strong>帳號：</strong> <span id="acc-num">24414400800351</span><br><strong>戶名：</strong> 莊詠茗<br><button onclick="copyAccount()" style="margin-top: 10px; width: 100%; border-radius: 10px; padding: 8px; cursor: pointer;">📋 複製帳號</button>
+        </div>
+        <p>應匯金額：<strong id="modal-amt" style="color:var(--error-red); font-size: 1.3rem;"></strong> 元</p>
+        <div class="form-group" style="text-align: left;">
+            <label>請輸入匯款後五碼：</label>
+            <input type="tel" id="lastFive" maxlength="5" placeholder="5位純數字" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)">
+            <div class="error-msg" id="lastFive-error">請輸入匯款帳號末5碼</div>
+        </div>
+        <button id="submit-btn" class="btn btn-primary" style="width: 100%;" onclick="finalSubmit()">確認並送出訂單</button>
+        <p onclick="closeModal()" style="color:gray; margin-top:15px; cursor:pointer;">返回修改</p>
+    </div>
+</div>
+
+<div id="success-modal" class="modal">
+    <div class="modal-body">
+        <h2 style="color: var(--ghibli-green);">🎉 訂單已受理！</h2>
+
+    <div style="background: #f9f9f9; padding: 15px; border-radius: 15px; text-align: left; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">
+            1. 店家將於 24H 內完成對帳。<br>
+            2. 對帳完成將透過 LINE@ 發送確認通知，如沒有收到通知請於上班日來電。<br>
+            3. 出貨日為下單7-14天(不含假日)；出貨當天將以 LINE@ 通知。<br>
+            4. 二人作業，請耐心等待，謝謝。<br>
+            5. 若需追蹤進度請加入 LINE@。
+        </div>
+        <a href="https://lin.ee/vleNEUw" target="_blank" class="line-btn">
+            💬 加入 LINE 追蹤訂單進度
+        </a>
+    <button class="btn btn-primary" onclick="location.reload()">回首頁</button></div></div>
 
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyEGadX25B0yvCMbEwAEq_j4KDZCTyQy6bDK8nedwWWMNiCU-A_78klvCC8d_A2RqJl/exec'; 
@@ -272,3 +303,4 @@
 </script>
 </body>
 </html>
+
