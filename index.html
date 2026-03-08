@@ -69,13 +69,14 @@
         <a href="https://www.instagram.com/jiangcun_handmade_desserts/" target="_blank" class="social-link-ig">📸 最新商品資訊 (IG Link)</a>
     </div>
 
-    <div id="page1" class="page active">
+
+        <div id="page1" class="page active">
         <div class="card">
-            <div class="form-group"><label>訂購姓名</label><input type="text" id="name" maxlength="15" oninput="validateField(this)"><div class="error-msg" id="name-error">姓名不可包含數字且需至少 2 字</div></div>
-            <div class="form-group"><label>訂購人電話</label><input type="tel" id="phone" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)"><div class="error-msg" id="phone-error">請輸入 10 位電話數字</div></div>
-            <div class="form-group"><label>宅配郵遞區號</label><input type="tel" id="zipcode" maxlength="5" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)"><div class="error-msg" id="zipcode-error">請輸入 3 或 5 碼郵遞區號</div></div>
-            <div class="form-group"><label>宅配詳細地址</label><input type="text" id="address" maxlength="50" oninput="validateField(this)"><div class="error-msg" id="address-error">需含縣市、區、路街、號及樓層</div></div>
-        </div>
+            <div class="form-group"><label>📜 收件人姓名</label><input type="text" id="name" maxlength="15" placeholder="填寫收件人的大名" oninput="validateField(this)"><div class="error-msg" id="name-error">請填寫姓名且不可含數字</div></div>
+            <div class="form-group"><label>📞 收件人聯絡電話</label><input type="tel" id="phone" maxlength="10" placeholder="例: 0228957766 或 09xxxxxxxx" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)"><div class="error-msg" id="phone-error">請輸入正確 10 位數字</div></div>
+            <div class="form-group"><label>📮 宅配郵遞區號</label><input type="tel" id="zipcode" maxlength="5" placeholder="例: 112" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)"><div class="error-msg" id="zipcode-error">請輸入正確區號</div></div>
+            <div class="form-group"><label>🏠 宅配詳細地址</label><input type="text" id="address" maxlength="50" placeholder="例:臺北市北投區大同街317號1樓" oninput="validateField(this)"><div class="error-msg" id="address-error">需含縣市、區、路街、號及樓層</div></div>
+
         <div class="bottom-nav"><button class="btn btn-primary" onclick="handleGoPage2()">下一步：挑選風味 →</button></div>
     </div>
 
@@ -83,8 +84,8 @@
         <div class="card">
             <div id="item-list"></div>
             <div class="shipping-card">
-                <p style="margin:0; font-weight:bold; color:var(--ghibli-brown);">📦 一箱最多裝 45 顆</p>
-                <p id="shipping-hint" style="margin:8px 0; color:var(--error-red); font-size:1rem; font-weight:bold;">✨ 全館滿 $3000 即享免運優惠！</p>
+                <p style="margin:0; font-weight:bold; color:var(--ghibli-brown);">溫馨提醒：📦 一箱最多裝 45 顆</p>
+                <p id="shipping-hint" style="margin:8px 0; color:var(--error-red); font-size:1rem; font-weight:bold;">✨ 滿 $3000 即享免運優惠！</p>
                 
                 <p id="fee-rule-hint" style="margin: 5px 0; font-size: 0.9rem; color: #666; display: block;">
                     💡 未滿 $3000 元，每箱運費 225 元
@@ -100,11 +101,11 @@
                 </div>
             </div>
         </div>
-        <div class="bottom-nav"><button class="btn btn-secondary" onclick="goPage(1)">返回</button><button class="btn btn-primary" onclick="renderSummary()">查看明細 →</button></div>
+        <div class="bottom-nav"><button class="btn btn-secondary" onclick="goPage(1)">返回</button><button class="btn btn-primary" onclick="renderSummary()">查看明細📋</button></div>
     </div>
 
     <div id="page3" class="page">
-        <div class="card"><h3>📖 訂購明細匯總</h3><div id="summary-content" style="line-height: 1.8;"></div><hr style="border: 0.5px dashed var(--ghibli-brown); margin: 15px 0;"><h3 id="final-total" style="text-align: right; margin: 0;"></h3></div>
+        <div class="card"><h3>📋 訂購明細匯總</h3><div id="summary-content" style="line-height: 1.8;"></div><hr style="border: 0.5px dashed var(--ghibli-brown); margin: 15px 0;"><h3 id="final-total" style="text-align: right; margin: 0;"></h3></div>
         <div class="bottom-nav"><button class="btn btn-secondary" onclick="goPage(2)">修改數量</button><button class="btn btn-primary" onclick="openModal()">確認匯款資訊</button></div>
     </div>
 </div>
@@ -173,7 +174,7 @@
         const ruleEl = document.getElementById('fee-rule-hint');
         
         if (totalAmt === 0) {
-            hintEl.innerHTML = "✨ 全館滿 $3000 即享免運優惠！";
+            hintEl.innerHTML = "✨ 滿 $3000 即享免運優惠！";
             hintEl.style.color = "var(--error-red)";
             ruleEl.style.display = "block";
         } else if (totalAmt < 3000) {
@@ -230,7 +231,7 @@
             const hasBasic = /縣|市/.test(val) && /區|鄉|鎮|市|里|村/.test(val);
             const hasRoad = /路|街|大道|巷/.test(val);
             const hasNo = /號/.test(val);
-            const hasFloor = /樓|室|層|B|b/.test(val);
+            const hasFloor = /樓|室|層|F|f|B|b/.test(val);
             isValid = hasBasic && hasRoad && hasNo && hasFloor && val.length >= 10;
         }
         if (el.id === 'lastFive') isValid = /^\d{5}$/.test(val);
@@ -264,3 +265,4 @@
 </script>
 </body>
 </html>
+
