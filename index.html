@@ -251,7 +251,7 @@
         if(subtotal === 0) return alert("請至少挑選一個品項喔！");
         const boxes = Math.ceil(totalQty / 45);
         const isFree = subtotal >= 3000;
-        const shippingFee = isFree ? 0 : (boxes * 160);
+        const shippingFee = isFree ? 0 : (boxes * 225);
         window.tempData = { itemsHtml, subtotal, isFree, shippingFee, boxes };
         document.getElementById('confirm-text').innerHTML = `您的訂單共 <b style="color:var(--error-red);">${totalQty}</b> 顆<br>將拆為 <b style="color:var(--ghibli-green);">${boxes}</b> 箱配送。`;
         document.getElementById('custom-confirm').style.display = 'flex';
@@ -304,6 +304,7 @@
 </script>
 </body>
 </html>
+
 
 
 
