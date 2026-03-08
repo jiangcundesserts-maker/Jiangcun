@@ -109,18 +109,9 @@
     </div>
 </div>
 
-<div id="custom-confirm" class="confirm-overlay">
-    <div class="confirm-box">
-        <div class="confirm-title">📦 配送箱數確認</div>
-        <div id="confirm-text" class="confirm-content"></div>
-        <div class="confirm-btns">
-            <button class="btn btn-secondary" onclick="closeConfirm(false)">返回修改</button>
-            <button class="btn btn-primary" onclick="closeConfirm(true)">確認明細</button>
-        </div>
-    </div>
-</div>
+<div id="custom-confirm" class="confirm-overlay"><div class="confirm-box"><div class="confirm-title">📦 配送箱數確認</div><div id="confirm-text" class="confirm-content"></div><div class="confirm-btns"><button class="btn btn-secondary" onclick="closeConfirm(false)">返回修改</button><button class="btn btn-primary" onclick="closeConfirm(true)">確認明細</button></div></div></div>
 
-<div id="modal" class="modal"><div class="modal-body"><h3>💰 匯款帳戶資訊</h3><div style="background: white; padding: 15px; border-radius: 15px; border: 2px dashed var(--ghibli-brown); text-align: left; margin-bottom: 15px;"><strong>銀行：</strong> 700 (郵局)<br><strong>帳號：</strong> <span>24414400800351</span><br><strong>戶名：</strong> 莊詠茗<br><button onclick="copyAccount()" style="margin-top: 10px; width: 100%; border-radius: 10px; padding: 8px;">📋 複製帳號</button></div><p>應匯總計：<strong id="modal-amt" style="color:var(--error-red); font-size: 1.3rem;"></strong> 元</p><div class="form-group" style="text-align: left;"><label>請輸入匯款後五碼：</label><input type="tel" id="lastFive" maxlength="5" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)"><div class="error-msg" id="lastFive-error">請輸入正確 5 碼數字</div></div><button id="submit-btn" class="btn btn-primary" style="width: 100%;" onclick="finalSubmit()">確認送出訂單</button><p onclick="closeModal()" style="color:gray; margin-top:15px; cursor:pointer;">返回修改</p></div></div>
+<div id="modal" class="modal"><div class="modal-body"><h3>💰 匯款帳戶資訊</h3><div style="background: white; padding: 15px; border-radius: 15px; border: 2px dashed var(--ghibli-brown); text-align: left; margin-bottom: 15px;"><strong>銀行：</strong> 700 (郵局)<br><strong>帳號：</strong> <span>24414400800351</span><br><strong>戶名：</strong> 莊詠茗<br><button onclick="copyAccount()" style="margin-top: 10px; width: 100%; border-radius: 10px; padding: 8px;">📋 複製帳號</button></div><p>應匯總計：<strong id="modal-amt" style="color:var(--error-red); font-size: 1.3rem;"></strong> 元</p><div class="form-group" style="text-align: left;"><label>匯款後五碼：</label><input type="tel" id="lastFive" maxlength="5" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)"><div class="error-msg" id="lastFive-error">請輸入正確 5 碼數字</div></div><button id="submit-btn" class="btn btn-primary" style="width: 100%;" onclick="finalSubmit()">確認送出訂單</button><p onclick="closeModal()" style="color:gray; margin-top:15px; cursor:pointer;">返回修改</p></div></div>
 
 <div id="success-modal" class="modal">
     <div class="modal-body">
@@ -139,6 +130,8 @@
         <button class="btn btn-primary" style="width: 100%;" onclick="location.reload()">回首頁</button>
     </div>
 </div>
+
+
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyEGadX25B0yvCMbEwAEq_j4KDZCTyQy6bDK8nedwWWMNiCU-A_78klvCC8d_A2RqJl/exec'; 
 
@@ -165,18 +158,14 @@
             </div>`;
     });
 
-    // ✅ 即時試算：包含顆數、金額、運費提示
     function calculateLiveTotal() {
-        let totalAmt = 0;
-        let totalQty = 0;
+        let totalAmt = 0; let totalQty = 0;
         flavors.forEach(f => {
             const qty = cart[f.id] || 0;
             const sub = qty * f.price;
-            totalAmt += sub;
-            totalQty += qty;
+            totalAmt += sub; totalQty += qty;
             document.getElementById(`sub-${f.id}`).innerText = sub;
         });
-        
         document.getElementById('live-qty').innerText = totalQty;
         document.getElementById('live-total').innerText = totalAmt;
         
@@ -190,15 +179,14 @@
         } else if (totalAmt < 3000) {
             hintEl.innerHTML = `🔥 還差 <span style="font-size:1.3rem;">$${3000 - totalAmt}</span> 即可享免運！`;
             hintEl.style.color = "#d48806";
-            ruleEl.style.display = "block"; // 顯示未滿3000規則
+            ruleEl.style.display = "block";
         } else {
             hintEl.innerHTML = "🎉 已達成免運門檻！運費由店家負擔";
             hintEl.style.color = "var(--ghibli-green)";
-            ruleEl.style.display = "none"; // ✅ 滿3000，自動隱藏規則提示
+            ruleEl.style.display = "none"; // ✅ 滿額自動隱藏
         }
     }
 
-    // ✅ 箱數確認窗：移除運費文字，僅保留資訊
     function renderSummary() {
         let subtotal = 0, totalQty = 0, itemsHtml = '';
         flavors.forEach(f => {
@@ -213,24 +201,66 @@
         const isFree = subtotal >= 3000;
         const shippingFee = isFree ? 0 : (boxes * 225); 
         window.tempData = { itemsHtml, subtotal, isFree, shippingFee, boxes };
-
-        // 移除運費提示文字，回歸簡約
         document.getElementById('confirm-text').innerHTML = `您的訂單共 <b style="color:var(--error-red); font-size:1.8rem;">${totalQty}</b> 顆<br>將拆為 <b style="color:var(--ghibli-green); font-size:1.8rem;">${boxes}</b> 箱配送。`;
         document.getElementById('custom-confirm').style.display = 'flex';
     }
 
-    // 其餘邏輯保持完整...
+    function updateQty(id, delta) { const input = document.getElementById(`q-${id}`); let val = Math.max(0, (parseInt(input.value) || 0) + delta); input.value = val; cart[id] = val; calculateLiveTotal(); }
+    function validateQtyInput(el, id) { el.value = el.value.replace(/[^0-9]/g, ''); cart[id] = parseInt(el.value) || 0; calculateLiveTotal(); }
+    function goPage(n) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById('page' + n).classList.add('active'); window.scrollTo(0,0); }
     function closeConfirm(confirmed) {
         document.getElementById('custom-confirm').style.display = 'none';
         if(confirmed) {
             const { itemsHtml, subtotal, isFree, shippingFee, boxes } = window.tempData;
             document.getElementById('summary-content').innerHTML = itemsHtml + `<hr style="border: 0.5px dashed #ccc; margin: 10px 0;">
                 <p style="display:flex; justify-content:space-between; font-weight:bold;"><span>小計</span> <span>$${subtotal}</span></p>
-                <p style="display:flex; justify-content:space-between; margin:0;">
-                    <span>運費 ${isFree ? '<small class="free-shipping-tag">(已達免運)</small>' : ''}</span> 
-                    <span style="color:${isFree ? 'var(--ghibli-green)' : 'var(--error-red)'}; font-weight:bold;">${shippingFee}元</span>
-                </p>
+                <p style="display:flex; justify-content:space-between; margin:0;"><span>運費 ${isFree ? '<small class="free-shipping-tag">(免運)</small>' : ''}</span> <span style="color:${isFree ? 'var(--ghibli-green)' : 'var(--error-red)'}; font-weight:bold;">${shippingFee}元</span></p>
                 <p style="font-size:0.85rem; color:#666; margin-top:5px;">配送箱數：<b>${boxes}</b> 箱</p>`;
             document.getElementById('final-total').innerHTML = `應匯總計：<span style="color:var(--error-red);">NT$ ${subtotal + shippingFee}</span>`;
             document.getElementById('modal-amt').innerText = subtotal + shippingFee;
             goPage(3);
+        }
+    }
+    function validateField(el) {
+        let isValid = false; const val = el.value.trim(); const errorEl = document.getElementById(el.id + '-error');
+        if (el.id === 'name') isValid = val.length >= 2 && /^[a-zA-Z\u4e00-\u9fa5 ]+$/.test(val);
+        if (el.id === 'phone') isValid = /^[0-9]{10}$/.test(val);
+        if (el.id === 'zipcode') isValid = /^\d{3,5}$/.test(val);
+        if (el.id === 'address') {
+            const hasBasic = /縣|市/.test(val) && /區|鄉|鎮|市|里|村/.test(val);
+            const hasRoad = /路|街|大道|巷/.test(val);
+            const hasNo = /號/.test(val);
+            const hasFloor = /樓|室|層|B|b/.test(val);
+            isValid = hasBasic && hasRoad && hasNo && hasFloor && val.length >= 10;
+        }
+        if (el.id === 'lastFive') isValid = /^\d{5}$/.test(val);
+        if (val.length === 0) { el.classList.remove('input-error', 'input-success'); if(errorEl) errorEl.style.display = 'none'; }
+        else if (isValid) { el.classList.remove('input-error'); el.classList.add('input-success'); if(errorEl) errorEl.style.display = 'none'; }
+        else { el.classList.remove('input-success'); el.classList.add('input-error'); if(errorEl) errorEl.style.display = 'block'; }
+        return isValid;
+    }
+    function handleGoPage2() {
+        const fields = ['name', 'phone', 'zipcode', 'address']; let ok = true;
+        fields.forEach(id => { if(!validateField(document.getElementById(id))) ok = false; });
+        if(ok) goPage(2); else alert("⚠️ 請修正紅框標示處資料。");
+    }
+    function openModal() { document.getElementById('modal').style.display='flex'; }
+    function closeModal() { document.getElementById('modal').style.display='none'; }
+    function copyAccount() { const acc = "24414400800351"; navigator.clipboard.writeText(acc).then(() => alert("帳號已複製")); }
+    function finalSubmit() {
+        const lastFive = document.getElementById('lastFive');
+        if (!validateField(lastFive)) return alert("請填寫正確的匯款末5碼");
+        const btn = document.getElementById('submit-btn'); btn.innerText = "傳送中..."; btn.disabled = true;
+        const now = new Date();
+        const orderData = {
+            order_date: `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()}`, order_time: `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`,
+            name: document.getElementById('name').value.trim(), phone: document.getElementById('phone').value.trim(), zipcode: document.getElementById('zipcode').value.trim(), address: document.getElementById('address').value.trim(),
+            ...cart, total_price: document.getElementById('modal-amt').innerText, last_five: lastFive.value.trim()
+        };
+        fetch(scriptURL, { method: 'POST', mode: 'no-cors', cache: 'no-cache', body: JSON.stringify(orderData) })
+        .then(() => { document.getElementById('modal').style.display = 'none'; document.getElementById('success-modal').style.display = 'flex'; let s = 120; const timer = setInterval(() => { s--; document.getElementById('countdown').innerText = s; if(s <= 0) { clearInterval(timer); location.reload(); } }, 1000); })
+        .catch(err => { alert("發送失敗"); btn.innerText = "確認送出"; btn.disabled = false; });
+    }
+</script>
+</body>
+</html>
