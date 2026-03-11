@@ -192,10 +192,26 @@
         flavors.forEach(f => { const qty = Number(cart[f.id]); if(qty > 0) { let it = qty * f.price; itemsHtml += `<p style="display:flex;justify-content:space-between;"><span>${f.name} x ${qty}</span> <span>$${it}</span></p>`; subtotal += it; totalQty += qty; } });
         if(totalQty === 0) return alert("請挑選口味");
         const boxes = Math.ceil(totalQty / 45); const shippingFee = subtotal >= 3000 ? 0 : boxes * 225;
-        document.getElementById('summary-content').innerHTML = itemsHtml + `<hr><p>小計: $${subtotal}</p><p>運費: $${shippingFee}元</p>`;
-        document.getElementById('final-total').innerText = `應匯總計: NT$ ${subtotal + shippingFee}`;
-        document.getElementById('modal-amt').innerText = subtotal + shippingFee;
-        goPage(3);
+               // 暫存資料
+        window.tempData = { itemsHtml, subtotal, isFree, shippingFee, boxes };
+        // 顯示彈窗
+        document.getElementById('confirm-text').innerHTML = `訂單總共 <b>${totalQty}</b> 顆，拆為 <b>${boxes}</b> 箱配送。`;
+        document.getElementById('custom-confirm').style.display = 'flex';
+    }
+
+    // ✅ 使用者點擊確認後執行
+    function closeConfirm(confirmed) {
+        document.getElementById('custom-confirm').style.display = 'none';
+        if(confirmed) {
+            const { itemsHtml, subtotal, isFree, shippingFee, boxes } = window.tempData;
+            document.getElementById('summary-content').innerHTML = itemsHtml + `<hr>` +
+                `<p style="display:flex; justify-content:space-between; font-weight:bold;"><span>小計</span><span>$${subtotal}</span></p>` +
+                `<p style="display:flex; justify-content:space-between;"><span>運費 ${isFree?'(免運)':''}</span><span style="color:${isFree?'green':'red'}">${shippingFee}元</span></p>` +
+                `<p style="font-size:0.8rem;text-align:right;">箱數：<b>${boxes}</b> 箱</p>`;
+            document.getElementById('final-total').innerText = `應匯總計: NT$ ${subtotal + shippingFee}`;
+            document.getElementById('modal-amt').innerText = subtotal + shippingFee;
+            goPage(3);
+        }
     }
 
     function updateQty(id, delta) { const input = document.getElementById(`q-${id}`); let val = Math.max(0, (parseInt(input.value) || 0) + delta); input.value = val; cart[id] = val; calculateLiveTotal(); }
@@ -230,6 +246,7 @@
 </script>
 </body>
 </html>
+
 
 
 
