@@ -207,10 +207,17 @@
         const lastFive = document.getElementById('lastFive'); if(!/^\d{5}$/.test(lastFive.value)) return alert("末5碼錯誤");
         const btn = document.getElementById('submit-btn'); btn.innerText = "資料傳送中..."; btn.disabled = true;
         const safeData = {
-            order_date: new Date().toLocaleDateString(), name: document.getElementById('name').value.trim().replace(/[<>]/g, ""),
-            phone: document.getElementById('phone').value.trim(), address: document.getElementById('address').value.trim(),
-            ...cart, total_price: document.getElementById('modal-amt').innerText, last_five: lastFive.value
+            order_date: `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()}`,
+            order_time: `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`,
+            name: document.getElementById('name').value.trim().replace(/[<>]/g, ""),
+            phone: document.getElementById('phone').value.trim(),
+            zipcode: document.getElementById('zipcode').value.trim(),
+            address: document.getElementById('address').value.trim().replace(/[<>]/g, ""),
+            ...cart, 
+            total_price: document.getElementById('modal-amt').innerText,
+            last_five: lastFive.value
         };
+
         fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(safeData) })
         .then(() => {
             document.getElementById('modal').style.display = 'none'; document.getElementById('success-modal').style.display = 'flex';
@@ -221,5 +228,6 @@
 </script>
 </body>
 </html>
+
 
 
