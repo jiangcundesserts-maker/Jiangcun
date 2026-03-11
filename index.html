@@ -78,12 +78,12 @@
         <h1>將村手作甜點 | 宅配訂購單</h1>
     </div>
 
-    <div id="page1" class="page active">
+   <div id="page1" class="page active">
         <div class="card">
-            <div class="form-group"><label>📜 訂購姓名</label><input type="text" id="name" maxlength="15" placeholder="請輸入收件人姓名" oninput="validateField(this)"><div class="error-msg" id="name-error">姓名至少 2 字且不可含數字</div></div>
-            <div class="form-group"><label>📞 聯絡電話</label><input type="tel" id="phone" maxlength="10" placeholder="09xxxxxxxx" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)"><div class="error-msg" id="phone-error">請填寫正確 10 位數字</div></div>
-            <div class="form-group"><label>📮 宅配郵遞區號</label><input type="tel" id="zipcode" maxlength="5" placeholder="例如: 241" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)"><div class="error-msg" id="zipcode-error">請填寫正確郵遞區號</div></div>
-            <div class="form-group"><label>🏠 宅配詳細地址</label><input type="text" id="address" maxlength="50" placeholder="路、街、號及樓層" oninput="validateField(this)"><div class="error-msg" id="address-error">需包含路名與號碼</div></div>
+            <div class="form-group"><label>📜 訂購姓名</label><input type="text" id="name" maxlength="15" placeholder="填寫您的大名" oninput="validateField(this)"><div class="error-msg" id="name-error">請填寫姓名且不可含數字</div></div>
+            <div class="form-group"><label>📞 聯絡電話</label><input type="tel" id="phone" maxlength="10" placeholder="例: 0228957766 或 09xxxxxxxx" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)"><div class="error-msg" id="phone-error">請輸入正確 10 位數字</div></div>
+            <div class="form-group"><label>📮 宅配郵遞區號</label><input type="tel" id="zipcode" maxlength="5" placeholder="例: 112" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)"><div class="error-msg" id="zipcode-error">請輸入正確區號</div></div>
+            <div class="form-group"><label>🏠 宅配詳細地址</label><input type="text" id="address" maxlength="50" placeholder="例:臺北市北投區大同街317號1樓" oninput="validateField(this)"><div class="error-msg" id="address-error">需含縣市、區、路街、號及樓層</div></div>
         </div>
         <div class="bottom-nav">
             <button class="btn btn-primary" onclick="handleGoPage2()">下一步：挑選口味 <div class="icon-box icon-next">Next</div></button>
@@ -220,4 +220,5 @@
 </script>
 </body>
 </html>
+
 
