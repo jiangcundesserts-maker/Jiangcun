@@ -84,6 +84,7 @@
     <div class="header-section">
         <img src="https://scontent.ftpe3-1.fna.fbcdn.net/v/t39.30808-6/305406763_542794297644069_6275812267100319693_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=LAtmXGjSGpsQ7kNvwH18cBV&_nc_oc=AdlDCnQJ84S9pAuNh3150d0iWpOYuCNq8cmysTZkvNYPcT_vnpUZzJJ8J1_kWTpt6wkKXjvTDm95sNaSSokqTq5-&_nc_zt=23&_nc_ht=scontent.ftpe3-1.fna&_nc_gid=yiAV4PoZUl8a9xQP4Z0_Mw&_nc_ss=8&oh=00_AfxxLW1L8utW27G2qztUAsM8UhLL2nTDS8u1y3l7zZkCgg&oe=69B315EC" alt="Logo" class="logo-img">
         <h1>將村手作甜點 | 宅配訂購單</h1>
+        <a href="https://www.instagram.com/jiangcun_handmade_desserts/" target="_blank" class="social-link-ig">📸 最新商品資訊 (IG Link)</a>
     </div>
 
    <div id="page1" class="page active">
@@ -118,8 +119,9 @@
         <div class="bottom-nav"><button class="btn btn-secondary" onclick="goPage(2)">修改</button><button class="btn btn-primary" onclick="openModal()">確認匯款資訊 💰</button></div>
     </div>
 </div>
+<div id="custom-confirm" class="modal"><div class="modal-body"><h3>📦 配送箱數確認</h3><div id="confirm-text" style="margin:20px 0; font-size:1.2rem;"></div><div style="display:flex; gap:10px;"><button class="btn btn-secondary" onclick="closeConfirm(false)">返回修改</button><button class="btn btn-primary" onclick="closeConfirm(true)">確認正確</button></div></div></div>
 
-<div id="modal" class="modal"><div class="modal-body"><h3>💰 匯款資訊</h3><div style="background:#FFF9FA; padding:15px; border-radius:10px; border:1px dashed var(--ink-blue); text-align:left; font-size:0.9rem; margin-bottom:15px;"><strong>郵局(700)</strong><br>帳號：24414400800351<br>戶名：莊詠茗</div><p>應匯總計：<strong id="modal-amt" style="color:var(--cinnabar-red); font-size:1.4rem;">0</strong> 元</p><div class="form-group"><label>匯款末五碼：</label><input type="tel" id="lastFive" maxlength="5" oninput="validateField(this)"></div><button id="submit-btn" class="btn btn-primary" style="width:100%" onclick="finalSubmit()">確認送出 <div class="icon-box icon-ok">OK</div></button><p onclick="closeModal()" style="color:gray; margin-top:10px; cursor:pointer; font-size: 0.8rem;">返回修改</p></div></div>
+<div id="modal" class="modal"><div class="modal-body"><h3>💰 匯款帳戶資訊</h3><div style="background:#FFF9FA; padding:15px; border-radius:10px; border:1px dashed var(--ink-blue); text-align:left; font-size:0.9rem; margin-bottom:15px;"><strong>郵局(700)</strong><br>帳號：24414400800351<br>戶名：莊詠茗</div><p>應匯總計：<strong id="modal-amt" style="color:var(--cinnabar-red); font-size:1.4rem;">0</strong> 元</p><div class="form-group"><label>匯款末五碼：</label><input type="tel" id="lastFive" maxlength="5" oninput="validateField(this)"></div><button id="submit-btn" class="btn btn-primary" style="width:100%" onclick="finalSubmit()">確認送出 <div class="icon-box icon-ok">OK</div></button><p onclick="closeModal()" style="color:gray; margin-top:10px; cursor:pointer; font-size: 0.8rem;">返回修改</p></div></div>
 
 <div id="success-modal" class="modal">
     <div class="modal-body">
@@ -228,6 +230,7 @@
 </script>
 </body>
 </html>
+
 
 
 
