@@ -60,7 +60,7 @@
         .btn-secondary { background: #EEE; color: #333; flex: 0.4; }
 
         /* ✅ 自定義向量圖示修正 */
-        .icon-box { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 10px; font-weight: bold; flex-shrink: 0; }
+        .icon-box { width: 28px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 10px; font-weight: bold; flex-shrink: 0; }
         .icon-next { background-color: #28a745; color: white; } 
         .icon-ok { background-color: #28a745; color: white; border-radius: 50%; font-size: 11px; }
 
@@ -86,7 +86,7 @@
             <div class="form-group"><label>🏠 宅配詳細地址</label><input type="text" id="address" maxlength="50" placeholder="路、街、號及樓層" oninput="validateField(this)"><div class="error-msg" id="address-error">需包含路名與號碼</div></div>
         </div>
         <div class="bottom-nav">
-            <button class="btn btn-primary" onclick="handleGoPage2()">下一步：挑選口味 <div class="icon-box icon-next"></div></button>
+            <button class="btn btn-primary" onclick="handleGoPage2()">下一步：挑選口味 <div class="icon-box icon-next">Next</div></button>
         </div>
     </div>
 
@@ -111,7 +111,7 @@
     </div>
 </div>
 
-<div id="modal" class="modal"><div class="modal-body"><h3>💰 匯款資訊</h3><div style="background:#FFF9FA; padding:15px; border-radius:10px; border:1px dashed var(--ink-blue); text-align:left; font-size:0.9rem; margin-bottom:15px;"><strong>郵局(700)</strong><br>帳號：24414400800351<br>戶名：莊詠茗</div><p>應匯總計：<strong id="modal-amt" style="color:var(--cinnabar-red); font-size:1.4rem;">0</strong> 元</p><div class="form-group"><label>匯款末五碼：</label><input type="tel" id="lastFive" maxlength="5" oninput="validateField(this)"></div><button id="submit-btn" class="btn btn-primary" style="width:100%" onclick="finalSubmit()">確認送出 <div class="icon-box icon-ok"></div></button><p onclick="closeModal()" style="color:gray; margin-top:10px; cursor:pointer; font-size: 0.8rem;">返回修改</p></div></div>
+<div id="modal" class="modal"><div class="modal-body"><h3>💰 匯款資訊</h3><div style="background:#FFF9FA; padding:15px; border-radius:10px; border:1px dashed var(--ink-blue); text-align:left; font-size:0.9rem; margin-bottom:15px;"><strong>郵局(700)</strong><br>帳號：24414400800351<br>戶名：莊詠茗</div><p>應匯總計：<strong id="modal-amt" style="color:var(--cinnabar-red); font-size:1.4rem;">0</strong> 元</p><div class="form-group"><label>匯款末五碼：</label><input type="tel" id="lastFive" maxlength="5" oninput="validateField(this)"></div><button id="submit-btn" class="btn btn-primary" style="width:100%" onclick="finalSubmit()">確認送出 <div class="icon-box icon-ok">OK</div></button><p onclick="closeModal()" style="color:gray; margin-top:10px; cursor:pointer; font-size: 0.8rem;">返回修改</p></div></div>
 
 <div id="success-modal" class="modal">
     <div class="modal-body">
@@ -158,14 +158,14 @@
     }
 
     function validateField(el) {
-        let isValid = el.value.trim().length > 0;
-        if (el.id === 'name') isValid = el.value.length >= 2 && !/\d/.test(el.value);
-        if (el.id === 'phone') isValid = /^[0-9]{10}$/.test(el.value);
-        if (el.id === 'zipcode') isValid = /^\d{3,5}$/.test(el.value);
-        if (el.id === 'address') isValid = el.value.length >= 10 && /路|街|巷/.test(el.value) && /號/.test(el.value);
-        if (el.id === 'lastFive') isValid = /^\d{5}$/.test(el.value);
-        el.classList.toggle('input-error', !isValid && el.value.length > 0);
-        document.getElementById(el.id + '-error').style.display = (!isValid && el.value.length > 0) ? 'block' : 'none';
+        let isValid = false; const val = el.value.trim(); const errorEl = document.getElementById(el.id + '-error');
+        if (el.id === 'name') isValid = val.length >= 2 && !/\d/.test(val);
+        if (el.id === 'phone') isValid = /^[0-9]{10}$/.test(val);
+        if (el.id === 'zipcode') isValid = /^\d{3,5}$/.test(val);
+        if (el.id === 'address') isValid = /縣|市/.test(val) && /區|鄉|鎮|市|里|村/.test(val) && /路|街|大道|巷/.test(val) && /號/.test(val) && /樓|室|層|F|f|B|b/.test(val);
+        if (el.id === 'lastFive') isValid = /^\d{5}$/.test(val);
+        el.classList.toggle('input-error', !isValid && val.length > 0);
+        if(errorEl) errorEl.style.display = (!isValid && val.length > 0) ? 'block' : 'none';
         return isValid;
     }
 
@@ -196,7 +196,7 @@
 
     function finalSubmit() {
         const lastFive = document.getElementById('lastFive'); if(!/^\d{5}$/.test(lastFive.value)) return alert("末5碼錯誤");
-        const btn = document.getElementById('submit-btn'); btn.innerText = "傳送中..."; btn.disabled = true;
+        const btn = document.getElementById('submit-btn'); btn.innerText = "資料傳送中..."; btn.disabled = true;
         
         // ✅ 安全強化：清理傳送內容
         const safeData = {
@@ -220,3 +220,4 @@
 </script>
 </body>
 </html>
+
