@@ -90,7 +90,7 @@
             <div class="form-group"><label>📮 宅配郵遞區號</label><input type="tel" id="zipcode" maxlength="5" placeholder="例：112" oninput="this.value=this.value.replace(/[^0-9]/g,''); validateField(this)"><div class="error-msg" id="zipcode-error">請輸入正確 3 或 5 碼郵遞區號</div></div>
             <div class="form-group"><label>🏠 宅配詳細地址</label><input type="text" id="address" maxlength="50" placeholder="例：臺北市北投區大同街317號1樓" oninput="validateField(this)"><div class="error-msg" id="address-error">地址不全(需含縣市、區、路街、號及樓層)</div></div>
         </div>
-        <div class="bottom-nav"><button class="btn btn-primary" onclick="handleGoPage2()">下一步：挑選風味 🍩</button></div>
+        <div class="bottom-nav"><button class="btn btn-primary" onclick="handleGoPage2()">下一步：挑選口味✅</button></div>
     </div>
 
     <div id="page2" class="page">
@@ -116,7 +116,7 @@
 
 <div id="custom-confirm" class="modal"><div class="modal-body"><h3>📦 配送箱數確認</h3><div id="confirm-text" style="margin:20px 0; font-size:1.2rem;"></div><div style="display:flex; gap:10px;"><button class="btn btn-secondary" onclick="closeConfirm(false)">返回修改</button><button class="btn btn-primary" onclick="closeConfirm(true)">確認正確</button></div></div></div>
 
-<div id="modal" class="modal"><div class="modal-body"><h3>💰 匯款帳戶資訊</h3><div style="background:#FFF9FA; padding:15px; border-radius:10px; border:1px dashed var(--ink-blue); text-align:left; font-size:0.9rem; margin-bottom:15px;"><strong>郵局(700)</strong><br>帳號：24414400800351<br>戶名：莊詠茗<br><button onclick="copyAccount()" style="margin-top:5px; border:1px solid var(--ink-blue); border-radius:5px; width:100%; cursor:pointer;">📋 複製帳號</button></div><p>應匯總計：<strong id="modal-amt" style="color:var(--error-red); font-size:1.5rem;">0</strong> 元</p><div class="form-group"><label> 匯款後五碼：</label><input type="tel" id="lastFive" maxlength="5" oninput="validateField(this)"><div class="error-msg" id="lastFive-error">請輸入正確 5 碼數字</div></div><button id="submit-btn" class="btn btn-primary" style="width:100%" onclick="finalSubmit()">確認送出訂單 🥯</button><p onclick="closeModal()" style="color:gray; margin-top:10px; cursor:pointer;">返回修改</p></div></div>
+<div id="modal" class="modal"><div class="modal-body"><h3>💰 匯款帳戶資訊</h3><div style="background:#FFF9FA; padding:15px; border-radius:10px; border:1px dashed var(--ink-blue); text-align:left; font-size:0.9rem; margin-bottom:15px;"><strong>郵局(700)</strong><br>帳號：24414400800351<br>戶名：莊詠茗<br><button onclick="copyAccount()" style="margin-top:5px; border:1px solid var(--ink-blue); border-radius:5px; width:100%; cursor:pointer;">📋 複製帳號</button></div><p>應匯總計：<strong id="modal-amt" style="color:var(--error-red); font-size:1.5rem;">0</strong> 元</p><div class="form-group"><label> 匯款後五碼：</label><input type="tel" id="lastFive" maxlength="5" oninput="validateField(this)"><div class="error-msg" id="lastFive-error">請輸入正確 5 碼數字</div></div><button id="submit-btn" class="btn btn-primary" style="width:100%" onclick="finalSubmit()">確認送出訂單✅</button><p onclick="closeModal()" style="color:gray; margin-top:10px; cursor:pointer;">返回修改</p></div></div>
 
 <div id="success-modal" class="modal">
     <div class="modal-body">
@@ -242,4 +242,5 @@
 </script>
 </body>
 </html>
+
 
