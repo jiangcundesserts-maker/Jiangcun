@@ -187,22 +187,26 @@
 
     function goPage(n) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById('page' + n).classList.add('active'); window.scrollTo(0,0); }
 
+
+    // ✅ 關鍵修復：按下查看明細後的邏輯
     function renderSummary() {
         let totalQty = 0, subtotal = 0, itemsHtml = '';
-        flavors.forEach(f => { const qty = Number(cart[f.id]); if(qty > 0) { let it = qty * f.price; itemsHtml += `<p style="display:flex;justify-content:space-between;"><span>${f.name} x ${qty}</span> <span>$${it}</span></p>`; subtotal += it; totalQty += qty; } });
-        if(totalQty === 0) return alert("請挑選口味");
-        const boxes = Math.ceil(totalQty / 45); const shippingFee = subtotal >= 3000 ? 0 : boxes * 225;
-               // 暫存資料
+        flavors.forEach(f => { const qty = Number(cart[f.id]); if(qty > 0) { let it = qty * f.price; itemsHtml += `<p style="display:flex;justify-content:space-between;margin:5px 0;"><span>${f.name} x ${qty}</span> <span>$${it}</span></p>`; subtotal += it; totalQty += qty; } });
+        if(totalQty === 0) return alert("請挑選品項");
+        const boxes = Math.ceil(totalQty / 45); 
+        const isFree = subtotal >= 3000;
+        const shippingFee = isFree ? 0 : boxes * 225;
+        // 將變數存入全域 tempData 確保 closeConfirm 能讀到
         window.tempData = { itemsHtml, subtotal, isFree, shippingFee, boxes };
-        // 顯示彈窗
+        // 渲染彈窗文字並顯示
         document.getElementById('confirm-text').innerHTML = `訂單總共 <b>${totalQty}</b> 顆，拆為 <b>${boxes}</b> 箱配送。`;
         document.getElementById('custom-confirm').style.display = 'flex';
     }
 
-    // ✅ 使用者點擊確認後執行
+    // ✅ 使用者點擊彈窗按鈕
     function closeConfirm(confirmed) {
         document.getElementById('custom-confirm').style.display = 'none';
-        if(confirmed) {
+        if(confirmed && window.tempData) {
             const { itemsHtml, subtotal, isFree, shippingFee, boxes } = window.tempData;
             document.getElementById('summary-content').innerHTML = itemsHtml + `<hr>` +
                 `<p style="display:flex; justify-content:space-between; font-weight:bold;"><span>小計</span><span>$${subtotal}</span></p>` +
@@ -246,6 +250,7 @@
 </script>
 </body>
 </html>
+
 
 
 
