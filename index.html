@@ -206,6 +206,7 @@
     function finalSubmit() {
         const lastFive = document.getElementById('lastFive'); if(!/^\d{5}$/.test(lastFive.value)) return alert("末5碼錯誤");
         const btn = document.getElementById('submit-btn'); btn.innerText = "資料傳送中..."; btn.disabled = true;
+        const now = new Date();
         const safeData = {
             order_date: `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()}`,
             order_time: `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`,
@@ -228,6 +229,7 @@
 </script>
 </body>
 </html>
+
 
 
 
