@@ -210,14 +210,14 @@
     // ✅ 使用者點擊彈窗按鈕
     function closeConfirm(confirmed) {
         document.getElementById('custom-confirm').style.display = 'none';
-        if(confirmed && window.tempData) {
-            const { itemsHtml, subtotal, isFree, shippingFee, boxes } = window.tempData;
-            document.getElementById('summary-content').innerHTML = itemsHtml + `<hr>` +
-                `<p style="display:flex; justify-content:space-between; font-weight:bold;"><span>小計</span><span>$${subtotal}</span></p>` +
-                `<p style="display:flex; justify-content:space-between;"><span>運費 ${isFree?'(免運)':''}</span><span style="color:${isFree?'green':'red'}">${shippingFee}元</span></p>` +
-                `<p style="font-size:0.8rem;text-align:right;">箱數：<b>${boxes}</b> 箱</p>`;
-            document.getElementById('final-total').innerText = `應匯總計: NT$ ${subtotal + shippingFee}`;
-            document.getElementById('modal-amt').innerText = subtotal + shippingFee;
+        if(confirmed && window.tempSummaryData) {
+            const d = window.tempSummaryData;
+            document.getElementById('summary-content').innerHTML = d.itemsHtml + `<hr>` +
+                `<p style="display:flex; justify-content:space-between; font-weight:bold;"><span>小計</span><span>$${d.subtotal}</span></p>` +
+                `<p style="display:flex; justify-content:space-between;"><span>運費 ${d.isFree?'(免運)':''}</span><span style="color:${d.isFree?'green':'red'}">${d.shippingFee}元</span></p>` +
+                `<p style="font-size:0.8rem;text-align:right;">箱數：<b>${d.boxes}</b> 箱</p>`;
+            document.getElementById('final-total').innerText = `應匯總計: NT$ ${d.subtotal + d.shippingFee}`;
+            document.getElementById('modal-amt').innerText = d.subtotal + d.shippingFee;
             goPage(3);
         }
     }
@@ -254,6 +254,7 @@
 </script>
 </body>
 </html>
+
 
 
 
