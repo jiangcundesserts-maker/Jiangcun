@@ -66,6 +66,14 @@
 
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
         .modal-body { background: white; padding: 25px; border-radius: 25px; width: 100%; border: 3px solid var(--ink-blue); text-align: center; max-width: 400px; }
+       /* ✅ 藍色 LINE 追蹤按鈕樣式 */
+        .line-btn-blue { 
+            display: flex; align-items: center; justify-content: center; 
+            background: linear-gradient(to right, #007AFF, #00C6FF); 
+            color: white; padding: 12px; border-radius: 25px; 
+            text-decoration: none; font-weight: bold; margin: 15px 0; 
+            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+        }
         .input-error { border-color: var(--cinnabar-red) !important; background-color: #FFF5F5 !important; }
         .error-msg { color: var(--cinnabar-red); font-size: 0.8rem; margin-top: 5px; display: none; }
     </style>
@@ -123,9 +131,9 @@
             4. 二人作業，請耐心等待，謝謝。<br>
             5. 若需追蹤進度請加入 LINE@。
         </div>
-        <a href="https://lin.ee/vleNEUw" target="_blank" class="line-btn">
-            💬 加入 LINE 追蹤訂單進度
-        </a>
+      <a href="https://lin.ee/vleNEUw" target="_blank" class="line-btn-blue">
+        💬 加入 LINE 追蹤訂單進度
+    </a>
 <p>視窗將於 <span id="countdown">120</span> 秒後重置。</p><button class="btn btn-primary" onclick="location.reload()">回首頁</button></div></div>
 
 
@@ -220,5 +228,6 @@
 </script>
 </body>
 </html>
+
 
 
