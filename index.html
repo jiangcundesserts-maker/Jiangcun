@@ -59,8 +59,8 @@
 #page2 .qty-input { 
     width: 84px !important;  /* 🚨 關鍵：58→64px 完美容納999 */
     text-align: center; border: 2px solid var(--ink-blue); 
-    border-radius: 8px; height: 34px; font-size: 1.2rem; 
-    font-weight: 700; background: white; color: var(--ink-blue); 
+    border-radius: 8px; height: 34px; font-size: 1.0rem; 
+    font-weight: 600; background: white; color: var(--ink-blue); 
     flex-shrink: 0; max-width: 84px; 
 }
 
@@ -164,11 +164,11 @@
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyEGadX25B0yvCMbEwAEq_j4KDZCTyQy6bDK8nedwWWMNiCU-A_78klvCC8d_A2RqJl/exec'; 
     const flavors = [
-        {id:'qty_original', name:'原味<br><span style="font-size:0.85rem; font-weight:normal; color:#666;">(無內餡)</span>', price:50},
-        {id:'qty_custard', name:'卡士達', price:70},
-        {id:'qty_peanut', name:'花生', price:70},
-        {id:'qty_matcha', name:'抹茶', price:80},
-        {id:'qty_chocolate', name:'可可', price:80}
+        {id:'qty_original', name:'原味<br><span style="font-size:0.85rem; font-weight:normal; color:#666;">(無內餡)<br></span>', price:50},
+        {id:'qty_custard', name:'卡士達<br>', price:70},
+        {id:'qty_peanut', name:'花生<br>', price:70},
+        {id:'qty_matcha', name:'抹茶<br>', price:80},
+        {id:'qty_chocolate', name:'可可<br>', price:80}
     ];
     let cart = {qty_original:0, qty_custard:0, qty_peanut:0, qty_matcha:0, qty_chocolate:0};
 
