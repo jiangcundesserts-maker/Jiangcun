@@ -2,6 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+    <!-- 🎯 高解析度 + 年長者優化 viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <title>將村手作甜點 | 宅配訂購單</title>
     <script>
@@ -11,6 +12,7 @@
     </script>
     <style>
         :root {
+            /* 🎯 年長者高對比優化 */
             --ink-blue: #1A237E; --washi-white: #FFFFFF; --cinnabar-red: #C62828; --paper-cream: #FDF5E6; --success-green: #006400;
         }
 
@@ -18,6 +20,7 @@
             font-family: "PingFang TC", "Noto Sans TC", sans-serif; background-color: var(--paper-cream); color: var(--ink-blue); 
             margin: 0; padding: 0; background-image: radial-gradient(circle at center, rgba(255,255,255,0.95) 0%, rgba(253, 245, 230, 0) 70%);
             background-attachment: fixed; background-size: cover; overflow-x: hidden;
+            /* 🎯 年長者字體放大 */
             font-size: 20px; line-height: 1.5;
         }
 
@@ -39,88 +42,38 @@
             background-color: var(--washi-white) !important; color: #000; border-radius: 12px; box-sizing: border-box;
         }
 
-        /* 🎯 第二頁修正：解決斷行 + 數字過長 */
-        #page2 .flavor-item { 
-            display: flex; align-items: center; padding: 14px 0; 
-            border-bottom: 1px dashed rgba(25, 25, 112, 0.25); 
-            gap: 10px; /* 增加間距 */
-        }
-        #page2 .flavor-info { 
-            flex: 1; min-width: 0; 
-            /* 防止價格斷行 */
-            display: flex; flex-direction: column; justify-content: center;
-        }
-        #page2 .flavor-info strong { 
-            font-size: 1.2rem; line-height: 1.3; font-weight: 700; 
-        }
-        #page2 .flavor-info small { 
-            font-size: 1rem; /* 統一大小 */
-            white-space: nowrap; /* 🚨 關鍵：防止NT$70斷行 */
-            font-weight: 600;
-        }
+        /* 🎯 第二頁專用：高解析度 + iPhone 17 Max 修正 */
+        #page2 .flavor-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px dashed rgba(25, 25, 112, 0.25); gap: 8px; }
+        #page2 .flavor-info { flex: 1; min-width: 0; }
+        #page2 .flavor-info strong { font-size: 1.2rem; display: block; line-height: 1.45; font-weight: 700; }
         
-        /* 🎯 qty-control：精簡空間給大數字 */
-        #page2 .qty-control { 
-            display: flex; align-items: center; gap: 3px; /* 縮小間距 */
-            flex-shrink: 0; 
-            max-width: 200px; /* 縮小總寬 */
-            width: auto; 
-            justify-content: flex-end; 
-        }
-        
-        #page2 .qty-btn { 
-            width: 32px; height: 32px; /* 微縮 */
-            border-radius: 6px; border: none; 
-            background: var(--ink-blue); color: white; 
-            font-size: 1.25rem; /* 略縮 */
-            cursor: pointer; display: flex; justify-content: center; align-items: center;
-            flex-shrink: 0;
-        }
-        
-        #page2 .qty-input { 
-            width: 52px !important; /* 縮小到52px，足夠999 */
-            height: 32px; 
-            text-align: center; border: 2px solid var(--ink-blue); 
-            border-radius: 6px; font-size: 1.15rem; font-weight: 700; 
-            background: white; color: var(--ink-blue);
-            flex-shrink: 0; max-width: 52px;
-        }
-        
-        /* 🎯 小計：支援5-6位數，關鍵修正 */
-        #page2 .subtotal-tag { 
-            width: auto; 
-            min-width: 70px; /* 🚨 關鍵：預留$49750空間 */
-            max-width: 75px;
-            text-align: right; 
-            color: var(--cinnabar-red); 
-            font-weight: 700; 
-            font-size: 1rem; /* 縮小字體 */
-            flex-shrink: 0;
-            white-space: nowrap; 
-            padding-left: 4px;
-            line-height: 1.2;
-        }
+        #page2 .qty-control { display: flex; align-items: center; gap: 4px; flex-shrink: 0; max-width: 220px; width: auto; justify-content: flex-end; min-width: 180px; }
+        #page2 .qty-btn { width: 34px; height: 34px; border-radius: 8px; border: none; background: var(--ink-blue); color: white; font-size: 1.3rem; cursor: pointer; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
+        #page2 .qty-input { width: 58px !important; text-align: center; border: 2px solid var(--ink-blue); border-radius: 8px; height: 34px; font-size: 1.2rem; font-weight: 700; background: white; color: var(--ink-blue); flex-shrink: 0; max-width: 58px; }
+        #page2 .subtotal-tag { width: auto; max-width: 85px; text-align: right; color: var(--cinnabar-red); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; white-space: nowrap; padding-left: 4px; }
 
-        /* 高解析度斷點 */
+        /* 🎯 高解析度斷點 */
         @media screen and (min-width: 430px) and (max-width: 440px) and (min-height: 2500px) {
-            #page2 .qty-control { max-width: 195px; gap: 2px; }
-            #page2 .qty-input { width: 50px !important; }
-            #page2 .subtotal-tag { min-width: 68px; max-width: 72px; font-size: 0.98rem; }
+            #page2 .qty-control { max-width: 215px; gap: 3px; }
+            #page2 .qty-input { width: 57px !important; font-size: 1.22rem; }
+            #page2 .subtotal-tag { max-width: 82px; font-size: 1.12rem; }
+            .app-container { padding: 16px; }
         }
-        @media screen and (min-width: 440px) and (max-width: 460px) {
-            #page2 .qty-control { max-width: 198px; }
-            #page2 .subtotal-tag { min-width: 70px; }
+        @media screen and (min-width: 440px) and (max-width: 460px) and (min-height: 1400px) {
+            #page2 .qty-control { max-width: 218px; }
+            #page2 .subtotal-tag { max-width: 84px; }
+            body { font-size: 20.5px; }
         }
         @media screen and (min-width: 768px) {
             .app-container { max-width: 550px; padding: 22px; }
             #page2 .flavor-item { gap: 12px; }
+            h1 { font-size: 1.8rem; }
         }
-
         @media screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-            body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+            body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+            .logo-img { image-rendering: -webkit-optimize-contrast; }
         }
 
-        /* 其他樣式保持 */
         .shipping-card { margin-top: 15px; padding: 18px; background: #fff9e6; border-radius: 15px; border: 1px solid #ffe082; text-align: center; font-size: 1.15rem; }
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.98); padding: 14px 15px; box-shadow: 0 -5px 18px rgba(0,0,0,0.08); display: flex; gap: 10px; max-width: 500px; margin: 0 auto; z-index: 999; border-radius: 20px 20px 0 0; }
         .btn { flex: 1; height: 48px; border-radius: 24px; border: none; font-size: 1.15rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
@@ -141,7 +94,6 @@
 </head>
 <body>
 
-<!-- HTML結構完全相同 -->
 <div class="app-container">
     <div class="header-section">
         <img src="https://scontent-tpe1-1.xx.fbcdn.net/v/t39.30808-6/305406763_542794297644069_6275812267100319693_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=R_E2HAqhpU0Q7kNvwGrrCx6&_nc_oc=AdkwHW6GHQUNrzEaBoKIDLOdreB62TPAaDd0GkH6LCs3LaRr8QeAkfohcw9FsWb52X8&_nc_zt=23&_nc_ht=scontent-tpe1-1.xx&_nc_gid=wdDLCQZa_jOFehpKDSoWBQ&_nc_ss=8&oh=00_AfxTuKocdmZ3ZeESIe4zYyas1bk4o7TMjMbbOIJ8UoVrDA&oe=69B77AEC" alt="Logo" class="logo-img">
@@ -183,7 +135,6 @@
     </div>
 </div>
 
-<!-- Modals保持相同 -->
 <div id="custom-confirm" class="modal"><div class="modal-body"><h3 style="font-weight:700;">📦 配送箱數確認</h3><div id="confirm-text" style="margin:20px 0; font-size:1.25rem;"></div><div style="display:flex; gap:10px;"><button class="btn btn-secondary" onclick="closeConfirm(false)">返回修改</button><button class="btn btn-primary" onclick="closeConfirm(true)">確認正確</button></div></div></div>
 
 <div id="modal" class="modal"><div class="modal-body"><h3 style="font-weight:700;">💰 匯款帳戶資訊</h3><div class="bank-info-box"><strong>銀行代碼：郵局(700)</strong><br><strong>銀行帳號：24414400800351</strong><br><strong>戶名：莊詠茗</strong><br><button onclick="copyAccount()" class="copy-btn-large">📋 點擊複製帳號</button></div><p>應匯總計：<strong id="modal-amt" style="color:var(--cinnabar-red); font-size:1.8rem;">0</strong> 元</p><div class="form-group"><label> 匯款末五碼：</label><input type="tel" id="lastFive" maxlength="5" oninput="validateField(this)"></div><button id="submit-btn" class="btn btn-primary" style="width:100%" onclick="finalSubmit()">確認送出 <div class="icon-box icon-ok">OK</div></button><p onclick="closeModal()" style="color:#666; margin-top:12px; cursor:pointer; font-size: 1.05rem;">返回修改</p></div></div>
@@ -200,7 +151,6 @@
 <a href="https://lin.ee/vleNEUw" target="_blank" class="line-btn-blue">💬 加入 LINE 追蹤訂單進度</a>
 <p>視窗將於 <span id="countdown">120</span> 秒後重置。</p><button class="btn btn-primary" onclick="location.reload()">回首頁</button></div></div>
 
-<!-- JavaScript完全相同 -->
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyEGadX25B0yvCMbEwAEq_j4KDZCTyQy6bDK8nedwWWMNiCU-A_78klvCC8d_A2RqJl/exec'; 
     const flavors = [
@@ -212,17 +162,35 @@
     ];
     let cart = {qty_original:0, qty_custard:0, qty_peanut:0, qty_matcha:0, qty_chocolate:0};
 
-    const listEl = document.getElementById('item-list');
-    flavors.forEach(f => {
-        listEl.innerHTML += `<div class="flavor-item"><div class="flavor-info"><strong>${f.name}</strong><small>NT$ ${f.price}</small></div><div class="qty-control"><button class="qty-btn" onclick="updateQty('${f.id}', -1)">-</button><input type="tel" class="qty-input" id="q-${f.id}" value="0" maxlength="3" oninput="validateQtyInput(this, '${f.id}')"><button class="qty-btn" onclick="updateQty('${f.id}', 1)">+</button><div class="subtotal-tag">$<span id="sub-${f.id}">0</span></div></div></div>`;
-    });
+    // 初始化口味列表
+    window.onload = function() {
+        const listEl = document.getElementById('item-list');
+        listEl.innerHTML = '';
+        flavors.forEach(f => {
+            listEl.innerHTML += `<div class="flavor-item">
+                <div class="flavor-info">
+                    <strong>${f.name}</strong>
+                    <small>NT$ ${f.price}</small>
+                </div>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="updateQty('${f.id}', -1)">-</button>
+                    <input type="tel" class="qty-input" id="q-${f.id}" value="0" maxlength="3" oninput="validateQtyInput(this, '${f.id}')">
+                    <button class="qty-btn" onclick="updateQty('${f.id}', 1)">+</button>
+                    <div class="subtotal-tag">$<span id="sub-${f.id}">0</span></div>
+                </div>
+            </div>`;
+        });
+        calculateLiveTotal();
+    };
 
-    // 所有JavaScript函數保持完全相同...
     function calculateLiveTotal() {
         let totalAmt = 0, totalQty = 0;
         flavors.forEach(f => {
-            const qty = Number(cart[f.id]) || 0; totalAmt += qty * f.price; totalQty += qty;
-            document.getElementById(`sub-${f.id}`).innerText = qty * f.price;
+            const qty = Number(cart[f.id]) || 0; 
+            totalAmt += qty * f.price; 
+            totalQty += qty;
+            const subEl = document.getElementById(`sub-${f.id}`);
+            if (subEl) subEl.innerText = qty * f.price;
         });
         document.getElementById('live-qty').innerText = totalQty;
         document.getElementById('live-total').innerText = totalAmt;
@@ -232,14 +200,162 @@
             hintEl.innerText = "🎉 達成免運門檻！"; 
             hintEl.style.color = "var(--success-green)"; 
             ruleEl.style.display = "none"; 
-        }
-        else { 
-            hintEl.innerHTML = totalAmt === 0 ? "✨ 滿 $3000 免運！" : `🔥 還差 <span style="font-size:1.5rem;">$${3000 - totalAmt}</span> 即可免運！`; 
+        } else { 
+            hintEl.innerHTML = totalAmt === 0 ? "✨ 滿 $3000 免運！" : `🔥 還差 <span style="font-size:1.5rem;">$${3000-totalAmt}</span> 即可免運！`; 
             hintEl.style.color = totalAmt === 0 ? "var(--ink-blue)" : "#d48806"; 
             ruleEl.style.display = "block"; 
         }
     }
 
+    // 🚨 關鍵修正：單反斜線正規表達式
     function validateField(el) {
-        let isValid = false; const val = el.value.trim(); const errorEl = document.getElementById(el.id + '-error');
-        if (el.id
+        let isValid = false;
+        const val = el.value.trim();
+        const errorEl = document.getElementById(el.id + '-error');
+        
+        switch(el.id) {
+            case 'name':
+                isValid = val.length >= 2 && !/\d/.test(val);  // ✅ 單反斜線
+                break;
+            case 'phone':
+                isValid = /^[0-9]{10}$/.test(val);            // ✅ 單反斜線
+                break;
+            case 'zipcode':
+                isValid = /^\d{3,5}$/.test(val);              // ✅ 單反斜線
+                break;
+            case 'address':
+                isValid = /縣|市/.test(val) && /區|鄉|鎮|市|里|村/.test(val) && 
+                         /路|街|大道|巷/.test(val) && /號/.test(val) && 
+                         /樓|室|層|F|f|B|b/.test(val);
+                break;
+            case 'lastFive':
+                isValid = /^\d{5}$/.test(val);                // ✅ 單反斜線
+                break;
+        }
+        
+        el.classList.toggle('input-error', !isValid && val.length > 0);
+        if(errorEl) errorEl.style.display = (!isValid && val.length > 0) ? 'block' : 'none';
+        return isValid;
+    }
+
+    // 🚨 關鍵修正：完善驗證邏輯
+    function handleGoPage2() {
+        const ids = ['name', 'phone', 'zipcode', 'address'];
+        let allValid = true;
+        
+        ids.forEach(id => {
+            const field = document.getElementById(id);
+            if (!field.value.trim()) {
+                allValid = false;
+                field.classList.add('input-error');
+            } else if (!validateField(field)) {
+                allValid = false;
+            }
+        });
+        
+        if (allValid) {
+            goPage(2);
+        } else {
+            alert('請正確填寫所有欄位');
+        }
+    }
+
+    function goPage(n) { 
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); 
+        document.getElementById('page' + n).classList.add('active'); 
+        window.scrollTo(0, 0); 
+    }
+
+    // 其餘函數保持不變...
+    function renderSummary() {
+        let totalQty = 0, subtotal = 0, itemsHtml = '';
+        flavors.forEach(f => { 
+            const qty = Number(cart[f.id]); 
+            if(qty > 0) { 
+                const cleanName = f.name.replace(/<br>/g, " ").replace(/<[^>]*>/g, "");
+                let it = qty * f.price; 
+                itemsHtml += `<p style="display:flex;justify-content:space-between;margin:5px 0;"><span>${cleanName} x ${qty}</span> <span>$${it}</span></p>`; 
+                subtotal += it; 
+                totalQty += qty; 
+            } 
+        });
+        if(totalQty === 0) return alert("請挑選口味");
+        const boxes = Math.ceil(totalQty / 45); 
+        const shippingFee = subtotal >= 3000 ? 0 : boxes * 225;
+        window.tempSummaryData = { itemsHtml, subtotal, isFree: subtotal>=3000, shippingFee, boxes };
+        document.getElementById('confirm-text').innerHTML = `訂單總共 <b>${totalQty}</b> 顆，拆為 <b>${boxes}</b> 箱配送。`;
+        document.getElementById('custom-confirm').style.display = 'flex';
+    }
+
+    function closeConfirm(confirmed) {
+        document.getElementById('custom-confirm').style.display = 'none';
+        if(confirmed && window.tempSummaryData) {
+            const d = window.tempSummaryData;
+            document.getElementById('summary-content').innerHTML = d.itemsHtml + `<hr>` +
+                `<p style="display:flex; justify-content:space-between; font-weight:bold;"><span>小計</span><span>$${d.subtotal}</span></p>` +
+                `<p style="display:flex; justify-content:space-between;"><span>運費 ${d.isFree?'(免運)':''}</span><span style="color:${d.isFree?'green':'red'}">${d.shippingFee}元</span></p>` +
+                `<p style="font-size:0.9rem;text-align:right;">箱數：<b>${d.boxes}</b> 箱</p>`;
+            document.getElementById('final-total').innerText = `應匯總計: NT$ ${d.subtotal + d.shippingFee}`;
+            document.getElementById('modal-amt').innerText = d.subtotal + d.shippingFee;
+            goPage(3);
+        }
+    }
+
+    function updateQty(id, delta) { 
+        const input = document.getElementById(`q-${id}`); 
+        let val = Math.max(0, (parseInt(input.value) || 0) + delta); 
+        input.value = val; 
+        cart[id] = val; 
+        calculateLiveTotal(); 
+    }
+    
+    function validateQtyInput(el, id) { 
+        el.value = el.value.replace(/[^0-9]/g, ''); 
+        cart[id] = Number(el.value) || 0; 
+        calculateLiveTotal(); 
+    }
+    
+    function openModal() { document.getElementById('modal').style.display='flex'; }
+    function closeModal() { document.getElementById('modal').style.display='none'; }
+    
+    function copyAccount() { 
+        navigator.clipboard.writeText("24414400800351").then(() => alert("帳號已複製"));
+    }
+
+    function finalSubmit() {
+        if(!/^\d{5}$/.test(document.getElementById('lastFive').value)) return alert("末5碼錯誤");
+        const btn = document.getElementById('submit-btn'); 
+        btn.innerText = "資料傳送中..."; 
+        btn.disabled = true;
+        const now = new Date();
+        const safeData = {
+            order_date: `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()}`,
+            order_time: `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`,
+            name: document.getElementById('name').value.trim().replace(/[<>]/g, ""),
+            phone: document.getElementById('phone').value.trim(),
+            zipcode: document.getElementById('zipcode').value.trim(),
+            address: document.getElementById('address').value.trim().replace(/[<>]/g, ""),
+            ...cart, 
+            total_price: document.getElementById('modal-amt').innerText, 
+            last_five: document.getElementById('lastFive').value
+        };
+        fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(safeData) })
+        .then(() => {
+            document.getElementById('modal').style.display = 'none'; 
+            document.getElementById('success-modal').style.display = 'flex';
+            let s = 120; 
+            const interval = setInterval(() => { 
+                s--; 
+                if(document.getElementById('countdown')) document.getElementById('countdown').innerText = s; 
+                if(s <= 0) { clearInterval(interval); location.reload(); }
+            }, 1000);
+        }).catch(() => { 
+            alert("連線錯誤，請聯繫店家"); 
+            btn.disabled = false; 
+            btn.innerText = '確認送出 <div class="icon-box icon-ok">OK</div>';
+        });
+    }
+</script>    
+    window.onload = calculateLiveTotal;
+</body>
+</html>
